@@ -1,0 +1,1 @@
+FROM gcr.io/google_containers/kube-cross:V1.10.3-1
