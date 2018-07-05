@@ -12,9 +12,9 @@ function sync_images_with_arch ()
     for img in $IMAGES;
     do
         echo "======================================= image:[$img] ============================================"
-        tags=$(curl -k -s -X GET https://gcr.io/v2/google_containers/$img-$arch/tags/list | jq -r '.tags[]'|sort -r)
+        tags=$(curl --proxy socks5://localhost/ -s -X GET https://gcr.io/v2/google_containers/$img-$arch/tags/list | jq -r '.tags[]'|sort -r)
         if [ $? -ne 0 ];then
-            curl -k -s -X GET https://gcr.io/v2/google_containers/$img-$arch/tags/list | jq -r '.tags[]'|sort -r
+            curl --proxy socks5://localhost/ -s -X GET https://gcr.io/v2/google_containers/$img-$arch/tags/list | jq -r '.tags[]'|sort -r
             echo "error occurred while get tags."
             exit
         fi
@@ -44,9 +44,9 @@ function sync_images ()
     for img in $IMAGES2;
     do
         echo "======================================= image:[$img] ============================================"
-        tags=$(curl -k -s -X GET https://gcr.io/v2/google_containers/$img/tags/list | jq -r '.tags[]'|sort -r)
+        tags=$(curl --proxy socks5://localhost/ -s -X GET https://gcr.io/v2/google_containers/$img/tags/list | jq -r '.tags[]'|sort -r)
         if [ $? -ne 0 ];then
-            curl -k -s -X GET https://gcr.io/v2/google_containers/$img/tags/list | jq -r '.tags[]'|sort -r
+            curl --proxy socks5://localhost/ -s -X GET https://gcr.io/v2/google_containers/$img/tags/list | jq -r '.tags[]'|sort -r
             echo "error occurred while get tags."
             exit
         fi
